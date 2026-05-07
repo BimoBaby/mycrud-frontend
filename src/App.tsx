@@ -2,14 +2,23 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 interface User {
-  _id?: string;
+  _id: string;
   name: string;
   email: string;
+  address: string;
+  contactnumber: string;
+}
+
+interface UserForm {
+  name: string;
+  email: string;
+  address: string;
+  contactnumber: string;
 }
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
-  const [form, setForm] = useState<User>({ name: "", email: "" });
+  const [form, setForm] = useState<UserForm>({ name: "", email: "", address: "", contactnumber: ""});
 
   const fetchUsers = async () => {
     const res = await axios.get("http://localhost:5000/users");
@@ -23,7 +32,7 @@ function App() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await axios.post("http://localhost:5000/users", form);
-    setForm({ name: "", email: "" });
+    setForm({ name: "", email: "", address: "", contactnumber: "" });
     fetchUsers();
   };
 
@@ -54,6 +63,20 @@ function App() {
         placeholder="Email"
         value={form.email}
         onChange={(e) => setForm({ ...form, email: e.target.value })}
+      />
+
+      <input
+        className="px-4 py-3 rounded-xl bg-white/20 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+        placeholder="Address"
+        value={form.address}
+        onChange={(e) => setForm({ ...form, address: e.target.value })}
+      />
+
+      <input
+        className="px-4 py-3 rounded-xl bg-white/20 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+        placeholder="Contact Number"
+        value={form.contactnumber}
+        onChange={(e) => setForm({ ...form, contactnumber: e.target.value })}
       />
 
       <button
