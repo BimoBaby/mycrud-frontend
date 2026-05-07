@@ -1,24 +1,70 @@
 import type { ReactNode } from "react";
+import { Users, LayoutDashboard, Settings } from "lucide-react";
 
 interface LayoutProps {
-  children: ReactNode;
+    children: ReactNode;
 }
 
 function Layout({ children }: LayoutProps) {
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-white flex items-center justify-center p-6">
+    return (
+        <div className="min-h-screen bg-slate-100 flex">
+            <aside className="w-64 bg-slate-900 text-white flex flex-col p-6 shadow-2xl">
+                <div className="mb-10">
+                    <h1 className="text-2xl font-bold tracking-wide">
+                        Admin Panel
+                    </h1>
 
-      <div className="w-full max-w-xl bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-6 border border-white/20">
+                    <p className="text-slate-400 text-sm mt-1">
+                        User Management System
+                    </p>
+                </div>
 
-        <h1 className="text-3xl font-bold mb-6 text-center tracking-wide">
-          ✨ User Management
-        </h1>
+                <nav className="flex flex-col gap-3">
+                    <button className="flex items-center gap-3 bg-blue-600 px-4 py-3 rounded-xl font-medium">
+                        <LayoutDashboard size={18} />
+                        Dashboard
+                    </button>
 
-        {children}
+                    <button className="flex items-center gap-3 hover:bg-slate-800 px-4 py-3 rounded-xl transition">
+                        <Users size={18} />
+                        Users
+                    </button>
 
-      </div>
-    </div>
-  );
+                    <button className="flex items-center gap-3 hover:bg-slate-800 px-4 py-3 rounded-xl transition">
+                        <Settings size={18} />
+                        Settings
+                    </button>
+                </nav>
+
+                <div className="mt-auto pt-10 text-sm text-slate-500">
+                    React + TypeScript + Tailwind
+                </div>
+
+            </aside>
+
+            <main className="flex-1 p-8 overflow-auto">
+                <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-6 flex justify-between items-center">
+                    <div>
+                        <h2 className="text-3xl font-bold text-slate-800">
+                            User Dashboard
+                        </h2>
+
+                        <p className="text-slate-500 mt-1">
+                            Manage and monitor registered users.
+                        </p>
+                    </div>
+
+                    <div className="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-lg shadow-lg">
+                        A
+                    </div>
+
+                </div>
+
+                {children}
+            </main>
+
+        </div>
+    );
 }
 
 export default Layout;

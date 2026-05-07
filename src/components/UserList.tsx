@@ -1,80 +1,141 @@
+
+import type { Dispatch, SetStateAction } from "react";
+import { Pencil, Trash2 } from "lucide-react";
+
 interface User {
-  _id: string;
-  name: string;
-  email: string;
-  address: string;
-  contactnumber: string;
+    _id: string;
+    name: string;
+    email: string;
+    address: string;
+    contactnumber: string;
 }
 
 interface UserForm {
-  name: string;
-  email: string;
-  address: string;
-  contactnumber: string;
+    name: string;
+    email: string;
+    address: string;
+    contactnumber: string;
 }
 
 interface UserListProps {
-  users: User[];
-  deleteUser: (id: string) => void;
-  setForm: React.Dispatch<React.SetStateAction<UserForm>>;
-  setEditingId: React.Dispatch<React.SetStateAction<string | null>>;
+    users: User[];
+    deleteUser: (id: string) => void;
+    setForm: Dispatch<SetStateAction<UserForm>>;
+    setEditingId: Dispatch<SetStateAction<string | null>>;
 }
 
 function UserList({
-  users,
-  deleteUser,
-  setForm,
-  setEditingId,
+    users,
+    deleteUser,
+    setForm,
+    setEditingId,
 }: UserListProps) {
-  return (
-    <ul className="space-y-3">
-      {users.map((u) => (
-        <li
-          key={u._id}
-          className="flex justify-between items-center bg-white/10 p-4 rounded-xl border border-white/10 hover:bg-white/20 transition"
-        >
-          <div>
-            <p className="font-semibold">{u.name}</p>
-            <p className="text-sm text-gray-300">{u.email}</p>
-            <p className="text-sm text-gray-300">{u.address}</p>
-            <p className="text-sm text-gray-300">
-              {u.contactnumber}
-            </p>
-          </div>
 
-          <div className="flex gap-2">
+    return (
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div className="p-6 border-b border-slate-200 flex justify-between items-center">
+                <div>
+                    <h2 className="text-2xl font-bold text-slate-800">
+                        Registered Users
+                    </h2>
+                    <p className="text-slate-500 mt-1">
+                        Total Users: {users.length}
+                    </p>
+                </div>
+            </div>
 
-            <button
-              onClick={() => {
+            <div className="overflow-x-auto">
+                <table className="w-full">
+                    <thead className="bg-slate-50 border-b border-slate-200">
+                        <tr>
+                            <th className="text-left p-4 text-slate-600 font-semibold">
+                                Name
+                            </th>
 
-                // PUT USER INFO INTO FORM
-                setForm({
-                  name: u.name,
-                  email: u.email,
-                  address: u.address,
-                  contactnumber: u.contactnumber,
-                });
+                            <th className="text-left p-4 text-slate-600 font-semibold">
+                                Email
+                            </th>
 
-                // SAVE CURRENT USER ID
-                setEditingId(u._id);
-              }}
-              className="bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded-lg text-sm font-medium transition"
-            >
-              Edit
-            </button>
+                            <th className="text-left p-4 text-slate-600 font-semibold">
+                                Address
+                            </th>
 
-            <button
-              onClick={() => deleteUser(u._id)}
-              className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg text-sm font-medium transition"
-            >
-              Delete
-            </button>
+                            <th className="text-left p-4 text-slate-600 font-semibold">
+                                Contact
+                            </th>
 
-          </div>
-        </li>
-      ))}
-    </ul>
-  );
+                            <th className="text-center p-4 text-slate-600 font-semibold">
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {users.map((u) => (
+                            <tr
+                                key={u._id}
+                                className="border-b border-slate-100 hover:bg-slate-50 transition"
+                            >
+
+                                <td className="p-4 font-medium text-slate-800">
+                                    {u.name}
+                                </td>
+
+                                <td className="p-4 text-slate-600">
+                                    {u.email}
+                                </td>
+
+                                <td className="p-4 text-slate-600">
+                                    {u.address}
+                                </td>
+
+                                <td className="p-4 text-slate-600">
+                                    {u.contactnumber}
+                                </td>
+
+                                <td className="p-4">
+
+                                    <div className="flex justify-center gap-2">
+
+                                        <button
+                                            onClick={() => {
+                                                setForm({
+                                                    name: u.name,
+                                                    email: u.email,
+                                                    address: u.address,
+                                                    contactnumber: u.contactnumber,
+                                                });
+
+                                                setEditingId(u._id);
+                                            }}
+                                            className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg transition flex items-center gap-2"
+                                        >
+                                            <Pencil size={16} />
+                                            Edit
+                                        </button>
+
+                                        <button
+                                            onClick={() => deleteUser(u._id)}
+                                            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition flex items-center gap-2"
+                                        >
+                                            <Trash2 size={16} />
+                                            Delete
+                                        </button>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+                        ))}
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    );
 }
 
 export default UserList;

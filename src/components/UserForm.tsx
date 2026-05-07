@@ -19,54 +19,95 @@ function UserForm({
   editingId,
 }: UserFormProps) {
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 mb-6">
+    <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 mb-6">
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold text-slate-800">
+          {editingId ? "Update User" : "Create New User"}
+        </h2>
 
-      <input
-        className="px-4 py-3 rounded-xl bg-white/20 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
-        placeholder="Name"
-        value={form.name}
-        onChange={(e) =>
-          setForm({ ...form, name: e.target.value })
-        }
-      />
+        <p className="text-slate-500 mt-1">
+          Fill in the information below.
+        </p>
+      </div>
 
-      <input
-        className="px-4 py-3 rounded-xl bg-white/20 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
-        placeholder="Email"
-        value={form.email}
-        onChange={(e) =>
-          setForm({ ...form, email: e.target.value })
-        }
-      />
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div>
+          <label className="block text-sm font-semibold text-slate-700 mb-2">
+            Full Name
+          </label>
 
-      <input
-        className="px-4 py-3 rounded-xl bg-white/20 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
-        placeholder="Address"
-        value={form.address}
-        onChange={(e) =>
-          setForm({ ...form, address: e.target.value })
-        }
-      />
+          <input
+            className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter full name"
+            value={form.name}
+            onChange={(e) =>
+              setForm({ ...form, name: e.target.value })
+            }
+          />
+        </div>
 
-      <input
-        className="px-4 py-3 rounded-xl bg-white/20 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
-        placeholder="Contact Number"
-        value={form.contactnumber}
-        onChange={(e) =>
-          setForm({
-            ...form,
-            contactnumber: e.target.value,
-          })
-        }
-      />
 
-      <button
-        className="bg-blue-500 hover:bg-blue-600 transition-all duration-200 py-3 rounded-xl font-semibold shadow-lg hover:scale-[1.02] active:scale-[0.98]"
-      >
-        {editingId ? "Update User" : "Add User"}
-      </button>
+        <div>
+          <label className="block text-sm font-semibold text-slate-700 mb-2">
+            Email Address
+          </label>
 
-    </form>
+          <input
+            className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter email"
+            value={form.email}
+            onChange={(e) =>
+              setForm({ ...form, email: e.target.value })
+            }
+          />
+        </div>
+
+
+        <div>
+          <label className="block text-sm font-semibold text-slate-700 mb-2">
+            Address
+          </label>
+
+          <input
+            className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter address"
+            value={form.address}
+            onChange={(e) =>
+              setForm({ ...form, address: e.target.value })
+            }
+          />
+        </div>
+
+
+        <div>
+          <label className="block text-sm font-semibold text-slate-700 mb-2">
+            Contact Number
+          </label>
+
+          <input
+            className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter contact number"
+            value={form.contactnumber}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                contactnumber: e.target.value,
+              })
+            }
+          />
+        </div>
+
+
+        <div className="md:col-span-2 flex justify-end">
+          <button
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition shadow-lg"
+          >
+            {editingId ? "Update User" : "Add User"}
+          </button>
+        </div>
+
+      </form>
+    </div>
   );
 }
 
