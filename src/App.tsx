@@ -25,6 +25,7 @@ function App() {
   const [editingId, setEditingId] = useState<string | null>(null);
 
 
+
   const fetchUsers = async () => {
     const res = await axios.get("http://localhost:5000/users");
     setUsers(res.data);
@@ -73,25 +74,32 @@ function App() {
     fetchUsers();
   };
 
+  const [activePage, setActivePage] = useState("dashboard");
+
   return (
-  <Layout>
+    <Layout
+      activePage={activePage}
+      setActivePage={setActivePage}
+    >
 
-    <UserForm
-      form={form}
-      setForm={setForm}
-      handleSubmit={handleSubmit}
-      editingId={editingId}
-    />
+      <UserForm
+        form={form}
+        setForm={setForm}
+        handleSubmit={handleSubmit}
+        editingId={editingId}
+        dashboardView={activePage === "dashboard"}
+      />
 
-    <UserList
-      users={users}
-      deleteUser={deleteUser}
-      setForm={setForm}
-      setEditingId={setEditingId}
-    />
+      <UserList
+        users={users}
+        deleteUser={deleteUser}
+        setForm={setForm}
+        setEditingId={setEditingId}
+        dashboardView={activePage === "dashboard"}
+      />
 
-  </Layout>
-);
+    </Layout>
+  );
 }
 
 export default App;

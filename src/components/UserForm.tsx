@@ -10,6 +10,7 @@ interface UserFormProps {
   setForm: React.Dispatch<React.SetStateAction<UserFormData>>;
   handleSubmit: (e: React.FormEvent) => void;
   editingId: string | null;
+  dashboardView?: boolean;
 }
 
 function UserForm({
@@ -17,8 +18,13 @@ function UserForm({
   setForm,
   handleSubmit,
   editingId,
+  dashboardView = true,
 }: UserFormProps) {
+
+  if (dashboardView) return null;
+
   return (
+
     <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 mb-6">
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-slate-800">

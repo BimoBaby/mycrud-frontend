@@ -1,11 +1,17 @@
-import type { ReactNode } from "react";
+import type { ReactNode, Dispatch, SetStateAction } from "react";
 import { Users, LayoutDashboard, Settings } from "lucide-react";
 
 interface LayoutProps {
     children: ReactNode;
+    activePage: string;
+    setActivePage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function Layout({ children }: LayoutProps) {
+function Layout({
+    children,
+    activePage,
+    setActivePage,
+}: LayoutProps) {
     return (
         <div className="min-h-screen bg-slate-100 flex">
             <aside className="w-64 bg-slate-900 text-white flex flex-col p-6 shadow-2xl">
@@ -20,12 +26,25 @@ function Layout({ children }: LayoutProps) {
                 </div>
 
                 <nav className="flex flex-col gap-3">
-                    <button className="flex items-center gap-3 bg-blue-600 px-4 py-3 rounded-xl font-medium">
+
+                    <button
+                        onClick={() => setActivePage("dashboard")}
+                        className={`flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition ${activePage === "dashboard"
+                                ? "bg-blue-600"
+                                : "hover:bg-slate-800"
+                            }`}
+                    >
                         <LayoutDashboard size={18} />
                         Dashboard
                     </button>
 
-                    <button className="flex items-center gap-3 hover:bg-slate-800 px-4 py-3 rounded-xl transition">
+                    <button
+                        onClick={() => setActivePage("users")}
+                        className={`flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition ${activePage === "users"
+                                ? "bg-blue-600"
+                                : "hover:bg-slate-800"
+                            }`}
+                    >
                         <Users size={18} />
                         Users
                     </button>
@@ -34,6 +53,7 @@ function Layout({ children }: LayoutProps) {
                         <Settings size={18} />
                         Settings
                     </button>
+
                 </nav>
 
                 <div className="mt-auto pt-10 text-sm text-slate-500">

@@ -22,6 +22,7 @@ interface UserListProps {
     deleteUser: (id: string) => void;
     setForm: Dispatch<SetStateAction<UserForm>>;
     setEditingId: Dispatch<SetStateAction<string | null>>;
+    dashboardView?: boolean;
 }
 
 function UserList({
@@ -29,6 +30,7 @@ function UserList({
     deleteUser,
     setForm,
     setEditingId,
+    dashboardView = true,
 }: UserListProps) {
 
     return (
@@ -64,9 +66,11 @@ function UserList({
                                 Contact
                             </th>
 
-                            <th className="text-center p-4 text-slate-600 font-semibold">
-                                Actions
-                            </th>
+                            {!dashboardView && (
+                                <th className="text-center p-4 text-slate-600 font-semibold">
+                                    Actions
+                                </th>
+                            )}
                         </tr>
                     </thead>
 
@@ -86,46 +90,50 @@ function UserList({
                                     {u.email}
                                 </td>
 
-                                <td className="p-4 text-slate-600">
-                                    {u.address}
+                                <td className="p-4 text-slate-600 max-w-xs">
+                                    <div className="whitespace-normal break-words">
+                                        {u.address}
+                                    </div>
                                 </td>
 
                                 <td className="p-4 text-slate-600">
                                     {u.contactnumber}
                                 </td>
 
-                                <td className="p-4">
+                                {!dashboardView && (
+                                    <td className="p-4">
 
-                                    <div className="flex justify-center gap-2">
+                                        <div className="flex justify-center gap-2">
 
-                                        <button
-                                            onClick={() => {
-                                                setForm({
-                                                    name: u.name,
-                                                    email: u.email,
-                                                    address: u.address,
-                                                    contactnumber: u.contactnumber,
-                                                });
+                                            <button
+                                                onClick={() => {
+                                                    setForm({
+                                                        name: u.name,
+                                                        email: u.email,
+                                                        address: u.address,
+                                                        contactnumber: u.contactnumber,
+                                                    });
 
-                                                setEditingId(u._id);
-                                            }}
-                                            className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg transition flex items-center gap-2"
-                                        >
-                                            <Pencil size={16} />
-                                            Edit
-                                        </button>
+                                                    setEditingId(u._id);
+                                                }}
+                                                className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg transition flex items-center gap-2"
+                                            >
+                                                <Pencil size={16} />
+                                                Edit
+                                            </button>
 
-                                        <button
-                                            onClick={() => deleteUser(u._id)}
-                                            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition flex items-center gap-2"
-                                        >
-                                            <Trash2 size={16} />
-                                            Delete
-                                        </button>
+                                            <button
+                                                onClick={() => deleteUser(u._id)}
+                                                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition flex items-center gap-2"
+                                            >
+                                                <Trash2 size={16} />
+                                                Delete
+                                            </button>
 
-                                    </div>
+                                        </div>
 
-                                </td>
+                                    </td>
+                                )}
 
                             </tr>
                         ))}
