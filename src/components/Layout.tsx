@@ -1,4 +1,4 @@
-import type { ReactNode, Dispatch, SetStateAction } from "react";
+import type {ReactNode} from "react";
 import { Users, LayoutDashboard, Settings } from "lucide-react";
 
 interface LayoutProps {

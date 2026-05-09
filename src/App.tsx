@@ -4,6 +4,16 @@ import Layout from "./components/Layout";
 import UserForm from "./components/UserForm";
 import UserList from "./components/UserList";
 
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+  ResponsiveContainer,
+} from "recharts";
+
 interface User {
   _id: string;
   name: string;
@@ -24,7 +34,26 @@ function App() {
   const [form, setForm] = useState<UserForm>({ name: "", email: "", address: "", contactnumber: "" });
   const [editingId, setEditingId] = useState<string | null>(null);
 
+  const fullNames = users.map(
+    (user) => user.name.trim().toLowerCase()
+  );
 
+  const duplicateNames = fullNames.filter(
+    (name, index) => fullNames.indexOf(name) !== index
+  );
+
+  const uniqueDuplicateNames = [...new Set(duplicateNames)];
+
+  const chartData = [
+    {
+      name: "Registered Users",
+      total: users.length,
+    },
+    {
+      name: "Duplicate Names",
+      total: uniqueDuplicateNames.length,
+    },
+  ];
 
   const fetchUsers = async () => {
     const res = await axios.get("http://localhost:5000/users");
@@ -89,6 +118,27 @@ function App() {
         editingId={editingId}
         dashboardView={activePage === "dashboard"}
       />
+
+      {activePage === "dashboard" && (
+        <div
+          className="bg-white p-5 rounded-xl mt-5"
+          style={{ width: "100%", height: 300 }}
+        >
+          <h2 className="text-xl font-bold mb-4">
+            User Analytics
+          </h2>
+
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={chartData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Bar dataKey="total" fill="#8884d8" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      )}
 
       <UserList
         users={users}
