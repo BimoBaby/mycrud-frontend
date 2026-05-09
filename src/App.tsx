@@ -55,10 +55,12 @@ function App() {
     },
   ];
 
-  const fetchUsers = async () => {
-    const res = await axios.get("http://localhost:5000/users");
-    setUsers(res.data);
-  };
+  const API = import.meta.env.VITE_API_URL;
+
+ const fetchUsers = async () => {
+  const res = await axios.get(`${API}/users`);
+  setUsers(res.data);
+};
 
   useEffect(() => {
     fetchUsers();
@@ -70,20 +72,23 @@ function App() {
     // IF EDITING
     if (editingId) {
 
-      await axios.put(
-        `http://localhost:5000/users/${editingId}`,
-        form
-      );
+      // await axios.put(
+      //   `http://localhost:5000/users/${editingId}`,
+      //   form
+      // );
+
+      await axios.put(`${API}/users/${editingId}`, form);
 
       setEditingId(null);
 
     } else {
 
       // ADD NEW USER
-      await axios.post(
-        "http://localhost:5000/users",
-        form
-      );
+      // await axios.post(
+      //   "http://localhost:5000/users",
+      //   form
+      // );
+      await axios.post(`${API}/users`, form);
     }
 
     // CLEAR FORM
@@ -99,8 +104,10 @@ function App() {
   };
 
   const deleteUser = async (id: string) => {
-    await axios.delete(`http://localhost:5000/users/${id}`);
-    fetchUsers();
+    // await axios.delete(`http://localhost:5000/users/${id}`);
+    // fetchUsers();
+    
+    await axios.delete(`${API}/users/${id}`);
   };
 
   const [activePage, setActivePage] = useState("dashboard");
