@@ -4,7 +4,9 @@ import { Pencil, Trash2 } from "lucide-react";
 
 interface User {
     _id: string;
-    name: string;
+    firstname: string;
+    middlename: string;
+    lastname: string;
     email: string;
     address: string;
     contactnumber: string;
@@ -12,7 +14,9 @@ interface User {
 }
 
 interface UserForm {
-    name: string;
+    firstname: string;
+    middlename: string;
+    lastname: string;
     email: string;
     address: string;
     contactnumber: string;
@@ -55,7 +59,6 @@ function UserList({
                             <th className="text-left p-4 text-slate-600 font-semibold">
                                 Name
                             </th>
-
                             <th className="text-left p-4 text-slate-600 font-semibold">
                                 Email
                             </th>
@@ -63,8 +66,8 @@ function UserList({
                             <th className="text-left p-4 text-slate-600 font-semibold">
                                 Address
                             </th>
-                            
-                             <th className="text-left p-4 text-slate-600 font-semibold">
+
+                            <th className="text-left p-4 text-slate-600 font-semibold">
                                 Gender
                             </th>
 
@@ -89,7 +92,7 @@ function UserList({
                             >
 
                                 <td className="p-4 font-medium text-slate-800">
-                                    {u.name}
+                                    `${u.firstname} ${u.middlename} ${u.lastname}`
                                 </td>
 
                                 <td className="p-4 text-slate-600">
@@ -118,7 +121,9 @@ function UserList({
                                             <button
                                                 onClick={() => {
                                                     setForm({
-                                                        name: u.name,
+                                                        firstname: u.firstname,
+                                                        middlename: u.middlename,
+                                                        lastname: u.lastname,
                                                         email: u.email,
                                                         address: u.address,
                                                         contactnumber: u.contactnumber,

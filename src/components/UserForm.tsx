@@ -1,5 +1,7 @@
 interface UserFormData {
-  name: string;
+  firstname: string;
+  middlename: string;
+  lastname: string;
   email: string;
   address: string;
   contactnumber: string;
@@ -38,20 +40,62 @@ function UserForm({
       </div>
 
       <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        <div>
-          <label className="block text-sm font-semibold text-slate-700 mb-2">
-            Full Name
-          </label>
+      {/* First Name */}
+<div>
+  <label className="block text-sm font-semibold text-slate-700 mb-2">
+    First Name
+  </label>
 
-          <input
-            className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter full name"
-            value={form.name}
-            onChange={(e) =>
-              setForm({ ...form, name: e.target.value })
-            }
-          />
-        </div>
+  <input
+    className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    placeholder="Enter first name"
+    value={form.firstname}
+    onChange={(e) =>
+      setForm({
+        ...form,
+        firstname: e.target.value,
+      })
+    }
+  />
+</div>
+
+{/* Middle Name */}
+<div>
+  <label className="block text-sm font-semibold text-slate-700 mb-2">
+    Middle Name
+  </label>
+
+  <input
+    className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    placeholder="Enter middle name"
+    value={form.middlename}
+    onChange={(e) =>
+      setForm({
+        ...form,
+        middlename: e.target.value,
+      })
+    }
+  />
+</div>
+
+{/* Last Name */}
+<div>
+  <label className="block text-sm font-semibold text-slate-700 mb-2">
+    Last Name
+  </label>
+
+  <input
+    className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    placeholder="Enter last name"
+    value={form.lastname}
+    onChange={(e) =>
+      setForm({
+        ...form,
+        lastname: e.target.value,
+      })
+    }
+  />
+</div>
 
 
         <div>

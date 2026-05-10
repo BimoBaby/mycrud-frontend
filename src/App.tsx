@@ -16,7 +16,9 @@ import {
 
 interface User {
   _id: string;
-  name: string;
+  firstname: string,
+  middlename: string,
+  lastname: string,
   email: string;
   address: string;
   contactnumber: string;
@@ -24,7 +26,9 @@ interface User {
 }
 
 interface UserForm {
-  name: string;
+  firstname: string,
+  middlename: string,
+  lastname: string,
   email: string;
   address: string;
   contactnumber: string;
@@ -33,16 +37,20 @@ interface UserForm {
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
-  const [form, setForm] = useState<UserForm>({ name: "", email: "", address: "", contactnumber: "", gender: "" });
+  const [form, setForm] = useState<UserForm>({
+    firstname: "",
+    middlename: "",
+    lastname: "", email: "", address: "", contactnumber: "", gender: ""
+  });
   const [editingId, setEditingId] = useState<string | null>(null);
 
- const maleUsers = users.filter(
-  (user) => user.gender?.toLowerCase() === "male"
-).length;
+  const maleUsers = users.filter(
+    (user) => user.gender?.toLowerCase() === "male"
+  ).length;
 
-const femaleUsers = users.filter(
-  (user) => user.gender?.toLowerCase() === "female"
-).length;
+  const femaleUsers = users.filter(
+    (user) => user.gender?.toLowerCase() === "female"
+  ).length;
 
   const chartData = [
     {
@@ -93,7 +101,9 @@ const femaleUsers = users.filter(
 
     // CLEAR FORM
     setForm({
-      name: "",
+      firstname: "",
+      middlename: "",
+      lastname: "",
       email: "",
       address: "",
       contactnumber: "",
@@ -106,9 +116,9 @@ const femaleUsers = users.filter(
 
   const deleteUser = async (id: string) => {
     // await axios.delete(`http://localhost:5000/users/${id}`);
-    // fetchUsers();
 
     await axios.delete(`${API}/users/${id}`);
+     fetchUsers();
   };
 
   const [activePage, setActivePage] = useState("dashboard");
