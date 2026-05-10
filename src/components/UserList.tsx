@@ -92,7 +92,7 @@ function UserList({
                             >
 
                                 <td className="p-4 font-medium text-slate-800">
-                                    `{u.firstname} {u.middlename} {u.lastname}`
+                                    {u.firstname} {u.middlename} {u.lastname}
                                 </td>
 
                                 <td className="p-4 text-slate-600">
