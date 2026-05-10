@@ -8,6 +8,7 @@ interface User {
     email: string;
     address: string;
     contactnumber: string;
+    gender: string;
 }
 
 interface UserForm {
@@ -15,6 +16,7 @@ interface UserForm {
     email: string;
     address: string;
     contactnumber: string;
+    gender: string;
 }
 
 interface UserListProps {
@@ -61,6 +63,10 @@ function UserList({
                             <th className="text-left p-4 text-slate-600 font-semibold">
                                 Address
                             </th>
+                            
+                             <th className="text-left p-4 text-slate-600 font-semibold">
+                                Gender
+                            </th>
 
                             <th className="text-left p-4 text-slate-600 font-semibold">
                                 Contact
@@ -97,6 +103,10 @@ function UserList({
                                 </td>
 
                                 <td className="p-4 text-slate-600">
+                                    {u.gender}
+                                </td>
+
+                                <td className="p-4 text-slate-600">
                                     {u.contactnumber}
                                 </td>
 
@@ -112,6 +122,7 @@ function UserList({
                                                         email: u.email,
                                                         address: u.address,
                                                         contactnumber: u.contactnumber,
+                                                        gender: u.gender,
                                                     });
 
                                                     setEditingId(u._id);

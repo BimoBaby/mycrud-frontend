@@ -20,6 +20,7 @@ interface User {
   email: string;
   address: string;
   contactnumber: string;
+  gender: string;
 }
 
 interface UserForm {
@@ -27,40 +28,39 @@ interface UserForm {
   email: string;
   address: string;
   contactnumber: string;
+  gender: string;
 }
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
-  const [form, setForm] = useState<UserForm>({ name: "", email: "", address: "", contactnumber: "" });
+  const [form, setForm] = useState<UserForm>({ name: "", email: "", address: "", contactnumber: "", gender: "" });
   const [editingId, setEditingId] = useState<string | null>(null);
 
-  const fullNames = users.map(
-    (user) => user.name.trim().toLowerCase()
-  );
+ const maleUsers = users.filter(
+  (user) => user.gender?.toLowerCase() === "male"
+).length;
 
-  const duplicateNames = fullNames.filter(
-    (name, index) => fullNames.indexOf(name) !== index
-  );
-
-  const uniqueDuplicateNames = [...new Set(duplicateNames)];
+const femaleUsers = users.filter(
+  (user) => user.gender?.toLowerCase() === "female"
+).length;
 
   const chartData = [
     {
-      name: "Registered Users",
-      total: users.length,
+      name: "Male",
+      total: maleUsers,
     },
     {
-      name: "Duplicate Names",
-      total: uniqueDuplicateNames.length,
+      name: "Female",
+      total: femaleUsers,
     },
   ];
 
   const API = import.meta.env.VITE_API_URL;
 
- const fetchUsers = async () => {
-  const res = await axios.get(`${API}/users`);
-  setUsers(res.data);
-};
+  const fetchUsers = async () => {
+    const res = await axios.get(`${API}/users`);
+    setUsers(res.data);
+  };
 
   useEffect(() => {
     fetchUsers();
@@ -97,6 +97,7 @@ function App() {
       email: "",
       address: "",
       contactnumber: "",
+      gender: "",
     });
 
     // REFRESH USERS
@@ -106,7 +107,7 @@ function App() {
   const deleteUser = async (id: string) => {
     // await axios.delete(`http://localhost:5000/users/${id}`);
     // fetchUsers();
-    
+
     await axios.delete(`${API}/users/${id}`);
   };
 
@@ -129,10 +130,10 @@ function App() {
       {activePage === "dashboard" && (
         <div
           className="bg-white p-5 rounded-xl mt-5"
-          style={{ width: "100%", height: 300 }}
+          style={{ marginBottom: "30px", width: "100%", height: 300 }}
         >
           <h2 className="text-xl font-bold mb-4">
-            User Analytics
+            Gender Analytics
           </h2>
 
           <ResponsiveContainer width="100%" height="100%">

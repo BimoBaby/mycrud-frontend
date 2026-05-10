@@ -3,6 +3,7 @@ interface UserFormData {
   email: string;
   address: string;
   contactnumber: string;
+  gender: string;
 }
 
 interface UserFormProps {
@@ -82,6 +83,27 @@ function UserForm({
               setForm({ ...form, address: e.target.value })
             }
           />
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-slate-700 mb-2">
+            Gender
+          </label>
+
+          <select
+            className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={form.gender}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                gender: e.target.value,
+              })
+            }
+          >
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
         </div>
 
 
