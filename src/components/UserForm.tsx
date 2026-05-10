@@ -40,135 +40,123 @@ function UserForm({
       </div>
 
       <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-5">
-      {/* First Name */}
-<div>
-  <label className="block text-sm font-semibold text-slate-700 mb-2">
-    First Name
-  </label>
+        {/* First Name */}
+        <div>
+          <label className="block text-sm font-semibold text-slate-700 mb-2">
+            First Name
+          </label>
 
-  <input
-    className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-    placeholder="Enter first name"
-    value={form.firstname}
-    onChange={(e) =>
-      setForm({
-        ...form,
-        firstname: e.target.value,
-      })
-    }
-  />
-</div>
+          <input
+            type="text"
+            maxLength={100}
+            pattern="^[A-Za-z\s]+$"
+            title="First name should contain letters only (max 100 characters)"
+            className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter first name"
+            value={form.firstname}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                firstname: e.target.value.replace(/[^A-Za-z\s]/g, ""),
+              })
+            }
+            required
+          />
+        </div>
 
-{/* Middle Name */}
-<div>
-  <label className="block text-sm font-semibold text-slate-700 mb-2">
-    Middle Name
-  </label>
+        {/* Middle Name */}
+        <div>
+          <label className="block text-sm font-semibold text-slate-700 mb-2">
+            Middle Name
+          </label>
 
-  <input
-    className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-    placeholder="Enter middle name"
-    value={form.middlename}
-    onChange={(e) =>
-      setForm({
-        ...form,
-        middlename: e.target.value,
-      })
-    }
-  />
-</div>
+          <input
+            type="text"
+            maxLength={100}
+            pattern="^[A-Za-z\s]+$"
+            title="Middle name should contain letters only (max 100 characters)"
+            className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter middle name"
+            value={form.middlename}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                middlename: e.target.value.replace(/[^A-Za-z\s]/g, ""),
+              })
+            }
+          />
+        </div>
 
-{/* Last Name */}
-<div>
-  <label className="block text-sm font-semibold text-slate-700 mb-2">
-    Last Name
-  </label>
+        {/* Last Name */}
+        <div>
+          <label className="block text-sm font-semibold text-slate-700 mb-2">
+            Last Name
+          </label>
 
-  <input
-    className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-    placeholder="Enter last name"
-    value={form.lastname}
-    onChange={(e) =>
-      setForm({
-        ...form,
-        lastname: e.target.value,
-      })
-    }
-  />
-</div>
+          <input
+            type="text"
+            maxLength={100}
+            pattern="^[A-Za-z\s]+$"
+            title="Last name should contain letters only (max 100 characters)"
+            className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter last name"
+            value={form.lastname}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                lastname: e.target.value.replace(/[^A-Za-z\s]/g, ""),
+              })
+            }
+            required
+          />
+        </div>
 
-
+        {/* Email */}
         <div>
           <label className="block text-sm font-semibold text-slate-700 mb-2">
             Email Address
           </label>
 
           <input
+            type="email"
+            maxLength={100}
             className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter email"
             value={form.email}
             onChange={(e) =>
-              setForm({ ...form, email: e.target.value })
-            }
-          />
-        </div>
-
-
-        <div>
-          <label className="block text-sm font-semibold text-slate-700 mb-2">
-            Address
-          </label>
-
-          <input
-            className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter address"
-            value={form.address}
-            onChange={(e) =>
-              setForm({ ...form, address: e.target.value })
-            }
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-semibold text-slate-700 mb-2">
-            Gender
-          </label>
-
-          <select
-            className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={form.gender}
-            onChange={(e) =>
               setForm({
                 ...form,
-                gender: e.target.value,
+                email: e.target.value,
               })
             }
-          >
-            <option value="">Select Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-          </select>
+            required
+          />
         </div>
 
-
+        {/* Contact Number */}
         <div>
           <label className="block text-sm font-semibold text-slate-700 mb-2">
             Contact Number
           </label>
 
           <input
+            type="text"
+            inputMode="numeric"
+            maxLength={11}
+            pattern="^[0-9]{11}$"
+            title="Contact number must contain exactly 11 digits"
             className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter contact number"
             value={form.contactnumber}
             onChange={(e) =>
               setForm({
                 ...form,
-                contactnumber: e.target.value,
+                contactnumber: e.target.value.replace(/\D/g, ""),
               })
             }
+            required
           />
         </div>
-
 
         <div className="md:col-span-2 flex justify-end">
           <button
