@@ -39,7 +39,7 @@ function UserForm({
         </p>
       </div>
 
-      <form className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {/* First Name */}
         <div>
           <label className="block text-sm font-semibold text-slate-700 mb-2">
@@ -160,24 +160,6 @@ function UserForm({
 
         <div className="md:col-span-2 flex justify-end">
           <button
-            type="button"
-            onClick={(e) => {
-              const confirmMessage = `
-Please confirm the user details:
-
-First Name: ${form.firstname}
-Middle Name: ${form.middlename}
-Last Name: ${form.lastname}
-Email: ${form.email}
-Contact Number: ${form.contactnumber}
-`;
-
-              const confirmed = window.confirm(confirmMessage);
-
-              if (confirmed) {
-                handleSubmit(e as unknown as React.FormEvent);
-              }
-            }}
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition shadow-lg"
           >
             {editingId ? "Update User" : "Add User"}
