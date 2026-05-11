@@ -118,7 +118,7 @@ function App() {
     // await axios.delete(`http://localhost:5000/users/${id}`);
 
     await axios.delete(`${API}/users/${id}`);
-     fetchUsers();
+    fetchUsers();
   };
 
   const [activePage, setActivePage] = useState("dashboard");
@@ -146,15 +146,17 @@ function App() {
             Gender Analytics
           </h2>
 
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Bar dataKey="total" fill="#8884d8" />
-            </BarChart>
-          </ResponsiveContainer>
+          <div className="bg-white p-6 rounded-2xl shadow h-[350px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={chartData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="gender" />
+                <YAxis />
+                <Tooltip />
+                <Bar dataKey="count" fill="#3b82f6" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
         </div>
       )}
 
