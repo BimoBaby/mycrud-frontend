@@ -138,25 +138,20 @@ function App() {
       />
 
       {activePage === "dashboard" && (
-        <div
-          className="bg-white p-5 rounded-xl mt-5"
-          style={{ marginBottom: "30px", width: "100%", height: 300 }}
-        >
+        <div className="bg-white p-6 rounded-2xl shadow mt-5 h-[420px]">
           <h2 className="text-xl font-bold mb-4">
             Gender Analytics
           </h2>
 
-          <div className="bg-white p-6 rounded-2xl shadow h-[350px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={chartData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="gender" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="count" fill="#3b82f6" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+          <ResponsiveContainer width="100%" height="85%">
+            <BarChart data={chartData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Bar dataKey="total" fill="#3b82f6" />
+            </BarChart>
+          </ResponsiveContainer>
         </div>
       )}
 
