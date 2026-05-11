@@ -77,6 +77,18 @@ function App() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const confirmed = window.confirm(`
+Please confirm the user details:
+
+First Name: ${form.firstname}
+Middle Name: ${form.middlename}
+Last Name: ${form.lastname}
+Email: ${form.email}
+Contact Number: ${form.contactnumber}
+`);
+
+    if (!confirmed) return;
+
     // IF EDITING
     if (editingId) {
 
@@ -118,7 +130,7 @@ function App() {
     // await axios.delete(`http://localhost:5000/users/${id}`);
 
     await axios.delete(`${API}/users/${id}`);
-     fetchUsers();
+    fetchUsers();
   };
 
   const [activePage, setActivePage] = useState("dashboard");
