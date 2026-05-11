@@ -27,148 +27,165 @@ function UserForm({
   if (dashboardView) return null;
 
   return (
+  <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-6 lg:p-8 mb-6">
 
-    <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 mb-6">
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold text-slate-800">
-          {editingId ? "Update User" : "Create New User"}
-        </h2>
+    {/* HEADER */}
+    <div className="mb-6">
+      <h2 className="text-xl sm:text-2xl font-bold text-slate-800">
+        {editingId ? "Update User" : "Create New User"}
+      </h2>
 
-        <p className="text-slate-500 mt-1">
-          Fill in the information below.
-        </p>
+      <p className="text-sm sm:text-base text-slate-500 mt-1">
+        Fill in the information below.
+      </p>
+    </div>
+
+    {/* FORM */}
+    <form
+      onSubmit={handleSubmit}
+      className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5"
+    >
+
+      {/* First Name */}
+      <div>
+        <label className="block text-sm font-semibold text-slate-700 mb-2">
+          First Name
+        </label>
+
+        <input
+          type="text"
+          maxLength={100}
+          pattern="^[A-Za-z\s]+$"
+          title="First name should contain letters only (max 100 characters)"
+          className="w-full border border-slate-300 rounded-xl px-4 py-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter first name"
+          value={form.firstname}
+          onChange={(e) =>
+            setForm({
+              ...form,
+              firstname: e.target.value.replace(/[^A-Za-z\s]/g, ""),
+            })
+          }
+          required
+        />
       </div>
 
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        {/* First Name */}
-        <div>
-          <label className="block text-sm font-semibold text-slate-700 mb-2">
-            First Name
-          </label>
+      {/* Middle Name */}
+      <div>
+        <label className="block text-sm font-semibold text-slate-700 mb-2">
+          Middle Name
+        </label>
 
-          <input
-            type="text"
-            maxLength={100}
-            pattern="^[A-Za-z\s]+$"
-            title="First name should contain letters only (max 100 characters)"
-            className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter first name"
-            value={form.firstname}
-            onChange={(e) =>
-              setForm({
-                ...form,
-                firstname: e.target.value.replace(/[^A-Za-z\s]/g, ""),
-              })
-            }
-            required
-          />
-        </div>
+        <input
+          type="text"
+          maxLength={100}
+          pattern="^[A-Za-z\s]+$"
+          title="Middle name should contain letters only (max 100 characters)"
+          className="w-full border border-slate-300 rounded-xl px-4 py-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter middle name"
+          value={form.middlename}
+          onChange={(e) =>
+            setForm({
+              ...form,
+              middlename: e.target.value.replace(/[^A-Za-z\s]/g, ""),
+            })
+          }
+        />
+      </div>
 
-        {/* Middle Name */}
-        <div>
-          <label className="block text-sm font-semibold text-slate-700 mb-2">
-            Middle Name
-          </label>
+      {/* Last Name */}
+      <div>
+        <label className="block text-sm font-semibold text-slate-700 mb-2">
+          Last Name
+        </label>
 
-          <input
-            type="text"
-            maxLength={100}
-            pattern="^[A-Za-z\s]+$"
-            title="Middle name should contain letters only (max 100 characters)"
-            className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter middle name"
-            value={form.middlename}
-            onChange={(e) =>
-              setForm({
-                ...form,
-                middlename: e.target.value.replace(/[^A-Za-z\s]/g, ""),
-              })
-            }
-          />
-        </div>
+        <input
+          type="text"
+          maxLength={100}
+          pattern="^[A-Za-z\s]+$"
+          title="Last name should contain letters only (max 100 characters)"
+          className="w-full border border-slate-300 rounded-xl px-4 py-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter last name"
+          value={form.lastname}
+          onChange={(e) =>
+            setForm({
+              ...form,
+              lastname: e.target.value.replace(/[^A-Za-z\s]/g, ""),
+            })
+          }
+          required
+        />
+      </div>
 
-        {/* Last Name */}
-        <div>
-          <label className="block text-sm font-semibold text-slate-700 mb-2">
-            Last Name
-          </label>
+      {/* Email */}
+      <div>
+        <label className="block text-sm font-semibold text-slate-700 mb-2">
+          Email Address
+        </label>
 
-          <input
-            type="text"
-            maxLength={100}
-            pattern="^[A-Za-z\s]+$"
-            title="Last name should contain letters only (max 100 characters)"
-            className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter last name"
-            value={form.lastname}
-            onChange={(e) =>
-              setForm({
-                ...form,
-                lastname: e.target.value.replace(/[^A-Za-z\s]/g, ""),
-              })
-            }
-            required
-          />
-        </div>
+        <input
+          type="email"
+          maxLength={100}
+          className="w-full border border-slate-300 rounded-xl px-4 py-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter email"
+          value={form.email}
+          onChange={(e) =>
+            setForm({
+              ...form,
+              email: e.target.value,
+            })
+          }
+          required
+        />
+      </div>
 
-        {/* Email */}
-        <div>
-          <label className="block text-sm font-semibold text-slate-700 mb-2">
-            Email Address
-          </label>
+      {/* Contact Number */}
+      <div className="md:col-span-2">
+        <label className="block text-sm font-semibold text-slate-700 mb-2">
+          Contact Number
+        </label>
 
-          <input
-            type="email"
-            maxLength={100}
-            className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter email"
-            value={form.email}
-            onChange={(e) =>
-              setForm({
-                ...form,
-                email: e.target.value,
-              })
-            }
-            required
-          />
-        </div>
+        <input
+          type="text"
+          inputMode="numeric"
+          maxLength={11}
+          pattern="^[0-9]{11}$"
+          title="Enter a valid 11-digit mobile number"
+          className="w-full border border-slate-300 rounded-xl px-4 py-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="09XXXXXXXXX"
+          value={form.contactnumber}
+          onChange={(e) =>
+            setForm({
+              ...form,
+              contactnumber: e.target.value.replace(/\D/g, ""),
+            })
+          }
+          required
+        />
+      </div>
 
-        {/* Contact Number */}
-        <div>
-          <label className="block text-sm font-semibold text-slate-700 mb-2">
-            Contact Number
-          </label>
+      {/* BUTTON */}
+      <div className="md:col-span-2 flex flex-col sm:flex-row justify-end">
+        <button
+          type="submit"
+          className="
+            w-full sm:w-auto
+            bg-blue-600 hover:bg-blue-700
+            text-white
+            px-6 py-3
+            rounded-xl
+            font-semibold
+            transition
+            shadow-lg
+          "
+        >
+          {editingId ? "Update User" : "Add User"}
+        </button>
+      </div>
 
-          <input
-            type="text"
-            inputMode="numeric"
-            maxLength={11}
-            pattern="^[0-9]{11}$"
-            title="your mobile or phone number"
-            className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter contact number"
-            value={form.contactnumber}
-            onChange={(e) =>
-              setForm({
-                ...form,
-                contactnumber: e.target.value.replace(/\D/g, ""),
-              })
-            }
-            required
-          />
-        </div>
-
-        <div className="md:col-span-2 flex justify-end">
-          <button
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition shadow-lg"
-          >
-            {editingId ? "Update User" : "Add User"}
-          </button>
-        </div>
-
-      </form>
-    </div>
-  );
+    </form>
+  </div>
+);
 }
 
 export default UserForm;

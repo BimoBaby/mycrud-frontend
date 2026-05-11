@@ -77,7 +77,7 @@ function UserList({
                 </div>
 
                 <div className="overflow-x-auto">
-                    <table className="w-full">
+                    <table className="min-w-full">
                         <thead className="bg-slate-50 border-b border-slate-200">
                             <tr>
                                 <th className="text-left p-4 text-slate-600 font-semibold">
